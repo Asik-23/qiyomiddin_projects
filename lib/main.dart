@@ -1,80 +1,102 @@
 
 import 'package:flutter/material.dart';
+import 'package:untitled2/fourth_page.dart';
+import 'package:untitled2/second_page.dart';
+
+
 
 void main(List<String> args) {
-runApp(const MyDrawer());
+runApp(MaterialApp(
+    home: MyApp()));
+}
+int atIndex=0;
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
 }
 
-class MyDrawer extends StatefulWidget {
-const MyDrawer({Key? key}) : super(key: key);
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    String _email="",_password="";
+    bool a=false,b=false;
+    return  Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.red,
+          title: const Text(
+            "Asigram",
+            style: TextStyle(color: Colors.white,fontSize: 20,),
+          ),
+          centerTitle: true,
+        ),
+        body:  Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Asigram",style: TextStyle(color: Colors.black,fontSize: 35,),),
+                Padding(padding: const EdgeInsets.symmetric(
+                  horizontal: 30,vertical: 0
+                ),
+                  child: Form(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    child: TextFormField(
+                      decoration: const InputDecoration(labelText: "Email"),
+                      validator: (input)=>!input!.contains("@")?"Please enter a valid email":null,
+                      onSaved: (input)=>_email = input!,
+                    ),
+                  ),
+                ),
+                Padding(padding: const EdgeInsets.symmetric(
+                    horizontal: 30,vertical:6
+                ),
+                  child: Form(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    child: TextFormField(
+                      decoration: const InputDecoration(labelText: "Password"),
+                      validator: (input)=>input!.length<8?"Password is not safe":null,
+                      onSaved: (input)=>_password = input!,
 
-@override
-State<MyDrawer> createState() => _MyDrawerState();
+
+                    ),
+                  ),
+                ),
+
+                ElevatedButton(onPressed: () async {
+                 {
+                    final result = Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => InsideOfApp()));
+                  }
+                },
+                  style: ElevatedButton.styleFrom(
+                      fixedSize: const Size(300, 45)
+                  ),
+                  child: const Text("Log in", ),
+                ),
+                const SizedBox(
+                  height: 20,
+                  width: 20,
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Don't have an account?"),
+                    TextButton(onPressed: () async{
+                      final result=Navigator.of(context).push(MaterialPageRoute(builder:(context)=>MyApp2()));
+                    }, child: const Text("Sign up",style: TextStyle(color: Colors.black),))
+                  ],
+                ),
+
+
+              ],
+
+
+        ),
+
+
+
+    );
+
+  }
 }
-
-class _MyDrawerState extends State<MyDrawer> {
-int selectedIndex=0;
-@override
-Widget build(BuildContext context) {
-return MaterialApp(
-home: Scaffold(
-appBar: AppBar(
-title: const Text('Telegram'),
-  centerTitle: true,
-),
-bottomNavigationBar: BottomNavigationBar(
-showUnselectedLabels: true,
-unselectedItemColor: Colors.blue,
-selectedItemColor: Colors.red,
-items: const[
-BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
-BottomNavigationBarItem(
-icon: Icon(Icons.message), label: 'message'),
-BottomNavigationBarItem(
-icon: Icon(Icons.video_collection), label: 'video'),
-BottomNavigationBarItem(
-icon: Icon(Icons.notifications), label: 'video'),
-],
-),
-drawer: Drawer(
-backgroundColor: Colors.white,
-child: Column(
-crossAxisAlignment: CrossAxisAlignment.stretch,
-children: [
-Container(
-padding: const EdgeInsets.all(20),
-color: const Color.fromARGB(255, 38, 107, 164),
-height: 200,
-child: Column(
-crossAxisAlignment: CrossAxisAlignment.start,
-mainAxisAlignment: MainAxisAlignment.center,
-children: [
-Container(
-padding: const EdgeInsets.all(20),
-decoration: const BoxDecoration(
-shape: BoxShape.circle, color: Colors.white),
-child: const Text(
-'Q',
-style: TextStyle(color: Colors.black, fontSize: 35),
-),
-),
-const Text(
-'Qiyomiddin Tursunov',
-style: TextStyle(color: Colors.black, fontSize: 20),
-),
-const Text(
-'tursunovqiyomiddin@gmail.com',
-style: TextStyle(color: Colors.black, fontSize: 17),
-),
-],
-),
-),
-],
-),
-),
-),
-);
-
-}
-}
-
