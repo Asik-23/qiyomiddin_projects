@@ -1,13 +1,15 @@
 
 import 'package:flutter/material.dart';
+import 'package:untitled2/fifth_page.dart';
 import 'package:untitled2/fourth_page.dart';
 import 'package:untitled2/second_page.dart';
+import 'package:untitled2/seventh_page.dart';
 
 
 
 void main(List<String> args) {
-runApp(MaterialApp(
-    home: MyApp()));
+runApp(const MaterialApp(
+    home: HomeTask()));
 }
 int atIndex=0;
 class MyApp extends StatefulWidget {
@@ -65,7 +67,7 @@ class _MyAppState extends State<MyApp> {
                 ElevatedButton(onPressed: () async {
                  {
                     final result = Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => InsideOfApp()));
+                        MaterialPageRoute(builder: (context) => const InsideOfApp()));
                   }
                 },
                   style: ElevatedButton.styleFrom(
@@ -83,7 +85,7 @@ class _MyAppState extends State<MyApp> {
                   children: [
                     const Text("Don't have an account?"),
                     TextButton(onPressed: () async{
-                      final result=Navigator.of(context).push(MaterialPageRoute(builder:(context)=>MyApp2()));
+                      final result=Navigator.of(context).push(MaterialPageRoute(builder:(context)=>const MyApp2()));
                     }, child: const Text("Sign up",style: TextStyle(color: Colors.black),))
                   ],
                 ),
